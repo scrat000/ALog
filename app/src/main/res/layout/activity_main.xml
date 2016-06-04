@@ -12,20 +12,20 @@
     tools:context="im.color.logger.MainActivity">
 
     <Button
-        android:id="@+id/logi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="logi"/>
-
-    <Button
         android:id="@+id/logv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="logv"/>
+
+    <Button
+        android:id="@+id/logi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="logi"/>
 
     <Button
         android:id="@+id/logd"

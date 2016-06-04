@@ -62,7 +62,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public synchronized void insertList(LogBean bean) {
         dbHandler.removeMessages (1);
         Message msg = dbHandler.obtainMessage ();
-        msg.what = 1;
+        msg.what = 3;
         msg.obj = bean;
         dbHandler.sendMessage (msg);
     }
@@ -142,7 +142,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
             if (3 == msg.what) {
                 logList.add ((LogBean) msg.obj);
-                if (logList.size () > 5000) {
+                if (logList.size () > 1000) {
                     sendEmptyMessage (1);
                 } else {
                     sendEmptyMessageDelayed (1, 1000);

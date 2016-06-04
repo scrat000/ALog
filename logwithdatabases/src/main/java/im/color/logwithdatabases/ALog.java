@@ -130,7 +130,8 @@ public class ALog {
             String methodString = formartLength (method, 100);
 
             StringBuilder stringBuilder = new StringBuilder ();
-            int i = msg.length () % 3000;
+            int i = msg.length () / 4000;
+
             String[] message = new String[i + 1];
             while (i > -1) {
                 stringBuilder.append (methodString);

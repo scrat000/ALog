@@ -50,27 +50,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId ()) {
             case R.id.logv: {
-                ALog.v (TAG, "v");
+                for (int i = 0; i < 100; i++) {
+                    ALog.v (TAG, "v:" + i);
+                }
             }
             break;
             case R.id.logi: {
-                ALog.i (TAG, "i");
+                for (int i = 0; i < 500; i++) {
+                    ALog.i (TAG, "i:" + i);
+                }
             }
             break;
             case R.id.logd: {
-                ALog.d (TAG, "d");
+                for (int i = 0; i < 1000; i++) {
+                    ALog.d (TAG, "d:" + i);
+                }
             }
             break;
             case R.id.logw: {
-                ALog.w (TAG, "w");
+                for (int i = 0; i < 2000; i++) {
+                    ALog.w (TAG, "w:" + i);
+                }
             }
             break;
             case R.id.loge: {
-                ALog.e (TAG, "e");
+                for (int i = 0; i < 5000; i++) {
+                    ALog.e (TAG, "e:" + i);
+                }
             }
             break;
             case R.id.loga: {
-                ALog.v (TAG, "v");
+                for (int i = 0; i < 8000; i++) {
+                    ALog.v (TAG, "v:" + i);
+                }
             }
             break;
             case R.id.dumpdb: {
