@@ -22,6 +22,7 @@ public class ALog {
     private static boolean LOGI = false;
     private static boolean LOGW = false;
     private static boolean LOGE = false;
+    private static boolean LOGA = false;
 
     private static DbHelper dbHelper;
 
@@ -40,51 +41,139 @@ public class ALog {
     }
 
     public static void v(String tag, String format, Object... args) {
+        v (false, tag, format, args);
+    }
+
+    public static void d(String tag, String format, Object... args) {
+        d (false, tag, format, args);
+    }
+
+    public static void i(String tag, String format, Object... args) {
+        i (false, tag, format, args);
+    }
+
+    public static void w(String tag, String format, Object... args) {
+        w (false, tag, format, args);
+    }
+
+    public static void e(String tag, String format, Object... args) {
+        e (false, tag, format, args);
+    }
+
+    public static void wtf(String tag, String format, Object... args) {
+        wtf (false, tag, format, args);
+    }
+
+    //======================================================================
+
+    public static void v(String format, Object... args) {
+        v (false, "", format, args);
+    }
+
+    public static void d(String format, Object... args) {
+        d (false, "", format, args);
+    }
+
+    public static void i(String format, Object... args) {
+        i (false, "", format, args);
+    }
+
+    public static void w(String format, Object... args) {
+        w (false, "", format, args);
+    }
+
+    public static void e(String format, Object... args) {
+        e (false, "", format, args);
+    }
+
+    public static void wtf(String format, Object... args) {
+        wtf (false, "", format, args);
+    }
+
+    //======================================================================
+
+    public static void v(boolean insertDb, String format, Object... args) {
+        v (insertDb, "", format, args);
+    }
+
+    public static void d(boolean insertDb, String format, Object... args) {
+        d (insertDb, "", format, args);
+    }
+
+    public static void i(boolean insertDb, String format, Object... args) {
+        i (insertDb, "", format, args);
+    }
+
+    public static void w(boolean insertDb, String format, Object... args) {
+        w (insertDb, "", format, args);
+    }
+
+    public static void e(boolean insertDb, String format, Object... args) {
+        e (insertDb, "", format, args);
+    }
+
+    public static void wtf(boolean insertDb, String format, Object... args) {
+        wtf (insertDb, "", format, args);
+    }
+
+    //======================================================================
+
+    public static void v(boolean insertDb, String tag, String format, Object... args) {
         if (LOGV) {
-            LogInfo logInfo = buildMessage (tag, format, args, Log.VERBOSE);
+            LogInfo logInfo = buildMessage (insertDb, tag, format, args, Log.VERBOSE);
             for (String info : logInfo.getInfo ()) {
                 Log.v (logInfo.getTag (), info);
             }
         }
     }
 
-    public static void d(String tag, String format, Object... args) {
+    public static void d(boolean insertDb, String tag, String format, Object... args) {
         if (LOGD) {
-            LogInfo logInfo = buildMessage (tag, format, args, Log.DEBUG);
+            LogInfo logInfo = buildMessage (insertDb, tag, format, args, Log.DEBUG);
             for (String info : logInfo.getInfo ()) {
                 Log.d (logInfo.getTag (), info);
             }
         }
     }
 
-    public static void i(String tag, String format, Object... args) {
+    public static void i(boolean insertDb, String tag, String format, Object... args) {
         if (LOGI) {
-            LogInfo logInfo = buildMessage (tag, format, args, Log.INFO);
+            LogInfo logInfo = buildMessage (insertDb, tag, format, args, Log.INFO);
             for (String info : logInfo.getInfo ()) {
                 Log.i (logInfo.getTag (), info);
             }
         }
     }
 
-    public static void w(String tag, String format, Object... args) {
+    public static void w(boolean insertDb, String tag, String format, Object... args) {
         if (LOGW) {
-            LogInfo logInfo = buildMessage (tag, format, args, Log.WARN);
+            LogInfo logInfo = buildMessage (insertDb, tag, format, args, Log.WARN);
             for (String info : logInfo.getInfo ()) {
                 Log.w (logInfo.getTag (), info);
             }
         }
     }
 
-    public static void e(String tag, String format, Object... args) {
+    public static void e(boolean insertDb, String tag, String format, Object... args) {
         if (LOGE) {
-            LogInfo logInfo = buildMessage (tag, format, args, Log.ERROR);
+            LogInfo logInfo = buildMessage (insertDb, tag, format, args, Log.ERROR);
             for (String info : logInfo.getInfo ()) {
                 Log.e (logInfo.getTag (), info);
             }
         }
     }
 
-    private static LogInfo buildMessage(String tag, String format, Object[] args, int logLevel) {
+    public static void wtf(boolean insertDb, String tag, String format, Object... args) {
+        if (LOGA) {
+            LogInfo logInfo = buildMessage (insertDb, tag, format, args, Log.ERROR);
+            for (String info : logInfo.getInfo ()) {
+                Log.wtf (logInfo.getTag (), info);
+            }
+        }
+    }
+
+
+    private static LogInfo buildMessage(boolean insertDb, String tag, String format, Object[] args, int logLevel) {
         try {
             String msg = (args == null || args.length == 0) ?
                     (TextUtils.isEmpty (format) ? "--->format null<---" : format)
@@ -113,7 +202,7 @@ public class ALog {
                     , threadId, callingClass, caller, callFile, lineNumber);
 
             //============================================
-            if (null != dbHelper) {
+            if (insertDb && null != dbHelper) {
                 LogBean bean = new LogBean ();
                 bean.setCallClass (callingClass);
                 bean.setCallFile (callFile);
@@ -130,7 +219,7 @@ public class ALog {
             String methodString = formartLength (method, 100);
 
             StringBuilder stringBuilder = new StringBuilder ();
-            int i = msg.length () / 4000;
+            int i = msg.length () / 3800;
 
             String[] message = new String[i + 1];
             while (i > -1) {

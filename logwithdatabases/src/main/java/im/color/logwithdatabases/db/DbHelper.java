@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -79,6 +80,8 @@ public class DbHelper extends SQLiteOpenHelper {
 
         //导出数据的文件名
         File file = new File (exportDir, "log_" + System.currentTimeMillis () + ".txt");
+        Log.i ("", file.getAbsolutePath ());
+
         try {
             BufferedWriter bufferedWriter = new BufferedWriter (new FileWriter (file));
 
